@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+
+    <link rel='stylesheet' href='/assets/style.css'>
+    <title>Document</title>
+</head>
+<body>
+   <nav>
+       <ul>
+           <li><a href='/'>Home</a></li>
+           <li><a href='/contact'>Contacts</a></li>
+           <li><a href='/about'>About</a></li>
+           <li><a href='/messages'>Messages</a></li>
+       </ul>
+   </nav>
+
+   <h1>Messages Received:</h1>
+
+   
+        <% for(let i=0; i < reviews.length; i++){
+            %>
+            <div class='message-tab'>
+                <br>
+                <br>
+                <div class="del_btn">
+
+                            <form method="POST" action='/messages/<%=reviews[i]._id %>?_method=DELETE' ">
+                                    <input type="image" class='del_btn' src="/assets/images/delete.png" width='20px' height='20px' alt="Submit" />
+                            </form>
+                            <div class='space'>
+                                <br>
+                                <br>
+                            </div>
+                
+                <a href="/messages/edit/<%=reviews[i]._id %>" ><img src="/assets/images/edit.png" width='20px' height='20px'></a>
+                </div>
+                <%=reviews[i].email %>
+                <br>
+                <br>
+                <b>Subject:</b> <%=reviews[i].subject %>
+                <br>
+                <br>
+                <b>Message:</b> <%=reviews[i].message %>
+            </div>
+            <br>
+            <br>
+            <%
+        } 
+        
+        %>
+       <!-- <script>
+        //    document.querySelector('.del_btn').onclick = delBtn;
+        //    function delBtn(){
+        //        const endpoint = `/message/${document.querySelector('.del_btn').dataset.doc}`;
+        //        fetch(endpoint, {
+        //            method: 'DELETE'
+        //        }).then((response) => response.json()).then(data => window.location.href=data.redirect)
+        //     // console.log(endpoint)
+        //    }
+                $('.del_btn').on('click', function(){
+                var id = $(this).text().replace(/ /g, "-");
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/message/' + id,
+                    success: function(data){
+                    //do something with the data via front-end framework
+                    location.reload();
+                    }
+                });
+            });
+       </script> -->
+</body>
+</html>
